@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Damas Online</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Jogo de Damas Online</h1>
+        
+        <div id="connection-status">
+            <p id="status-message">Aguardando conexão...</p>
+            <div id="room-info" class="hidden">
+                <p>ID da Sala: <span id="room-id"></span></p>
+                <button id="copy-room">Copiar ID</button>
+            </div>
+            <div id="join-room">
+                <input type="text" id="room-input" placeholder="Insira o ID da sala">
+                <button id="join-button">Entrar na Sala</button>
+            </div>
+        </div>
+
+        <div id="game-info">
+            <p id="turn-info">Aguardando jogador...</p>
+            <div id="player-info">
+                <div class="player">
+                    <div class="player-color white"></div>
+                    <span>Você</span>
+                </div>
+                <div class="player">
+                    <div class="player-color black"></div>
+                    <span>Oponente</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="board-container">
+            <div id="board"></div>
+        </div>
+
+        <div id="game-over" class="hidden">
+            <h2 id="winner-message"></h2>
+            <button id="new-game-button">Novo Jogo</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

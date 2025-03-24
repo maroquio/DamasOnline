@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  damas-app:
+    build: .
+    container_name: damas-online
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./logs:/usr/src/app/logs

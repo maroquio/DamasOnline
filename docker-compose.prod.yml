@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  damas-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: damas-online
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DOMAIN=damas.maroquio.com
+    ports:
+      - 3001:3000"  # Apenas localhost para trabalhar com Nginx
+    volumes:
+      - ./logs:/usr/src/app/logs
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Nginx serve como proxy reverso (opcional, pode ser usado fora do Docker)
+  # nginx:
+  #   image: nginx:alpine
+  #   container_name: damas-nginx
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/conf.d/default.conf
+  #     - /etc/letsencrypt:/etc/letsencrypt:ro
+  #   depends_on:
+  #     - damas-app
+  #   restart: always
