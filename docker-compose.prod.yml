@@ -9,10 +9,10 @@ services:
     restart: always
     environment:
       - NODE_ENV=production
-      - PORT=3000
+      - PORT=3001
       - DOMAIN=damas.maroquio.com
     ports:
-      - 3051:3000"  # Apenas localhost para trabalhar com Nginx
+      - 3001:3000"  # Apenas localhost para trabalhar com Nginx
     volumes:
       - ./logs:/usr/src/app/logs
     deploy:
